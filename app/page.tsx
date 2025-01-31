@@ -118,7 +118,7 @@ export default function Home() {
               <div>
                 <h3 className="text-2xl font-semibold mb-4">AI-Powered Fashion Insights</h3>
                 <p className="mb-4">
-                  Our advanced AI doesn't just look at what you've bought - it understands your style preferences
+                  Our advanced AI doesn&apos;t just look at what you&apos;ve bought - it understands your style preferences
                   through interactive interviews and user testing.
                 </p>
                 <p className="mb-4">
