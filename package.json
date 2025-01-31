@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "predeployment-check": "npm run typescript && npm run lint && npm run build",
+    "typescript": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
@@ -25,6 +28,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.16",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

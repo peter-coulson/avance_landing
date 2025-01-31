@@ -13,7 +13,7 @@ export default function Contact() {
     message: "",
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prevState) => ({
       ...prevState,
@@ -21,7 +21,7 @@ export default function Contact() {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // Here you would typically send the form data to your backend
     console.log("Form submitted:", formData)
