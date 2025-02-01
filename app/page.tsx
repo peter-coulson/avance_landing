@@ -27,9 +27,11 @@ export default function Home() {
                 Avance Style uses cutting-edge AI to understand your unique fashion preferences and deliver personalized
                 eBay product recommendations.
               </p>
-              <Button size="lg" className="bg-yellow-400 text-purple-900 hover:bg-yellow-300">
-                Get Started
-              </Button>
+              <Link href="/recommendations">
+                <Button size="lg" className="bg-yellow-400 text-purple-900 hover:bg-yellow-300">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -108,11 +110,11 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
                 <Image
-                  src="/placeholder.svg"
-                  alt="AI Fashion Assistant"
+                  src="/ai-fashion-assistant.jpg"
+                  alt="AI Fashion Assistant showcasing personalized style recommendations"
                   width={500}
                   height={300}
-                  className="rounded-lg shadow-lg"
+                  className="rounded-lg shadow-lg w-full object-cover"
                 />
               </div>
               <div>
@@ -125,7 +127,9 @@ export default function Home() {
                   By combining this deep understanding with your eBay history, we create a unique style profile that
                   evolves with you.
                 </p>
-                <Button className="bg-yellow-400 text-purple-900 hover:bg-yellow-300">Learn More</Button>
+                <Link href="/recommendations">
+                  <Button className="bg-yellow-400 text-purple-900 hover:bg-yellow-300">Learn More</Button>
+                </Link>
               </div>
             </div>
           </div>

@@ -7,26 +7,43 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null,
+    message: string
+  }>({ type: null, message: '' })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData)
-    // Reset form after submission
-    setFormData({ name: "", email: "", message: "" })
+    setIsSubmitting(true)
+
+    try {
+      const form = e.target as HTMLFormElement
+      const response = await fetch("https://formspree.io/f/xgvoyyzy", {
+        method: "POST",
+        body: new FormData(form),
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thanks for your submission!'
+        })
+        form.reset()
+      } else {
+        throw new Error('Form submission failed')
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Oops! There was a problem submitting your form'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -49,6 +66,12 @@ export default function Contact() {
           <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {submitStatus.message && (
+              <div className={`p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-500/20' : 'bg-red-500/20'
+                }`}>
+                {submitStatus.message}
+              </div>
+            )}
             <div>
               <label htmlFor="name" className="block mb-2">
                 Name
@@ -57,8 +80,6 @@ export default function Contact() {
                 type="text"
                 id="name"
                 name="name"
-                value={formData.name}
-                onChange={handleChange}
                 required
                 className="w-full bg-white/10 text-white"
               />
@@ -71,8 +92,6 @@ export default function Contact() {
                 type="email"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
                 required
                 className="w-full bg-white/10 text-white"
               />
@@ -84,15 +103,17 @@ export default function Contact() {
               <Textarea
                 id="message"
                 name="message"
-                value={formData.message}
-                onChange={handleChange}
                 required
                 className="w-full bg-white/10 text-white"
                 rows={4}
               />
             </div>
-            <Button type="submit" className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300">
-              Send Message
+            <Button
+              type="submit"
+              className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
         </div>
