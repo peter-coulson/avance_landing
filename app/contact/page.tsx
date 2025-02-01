@@ -5,6 +5,14 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useForm } from "react-hook-form"
+
+// Add the interface for the form data
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -13,15 +21,19 @@ export default function Contact() {
     message: string
   }>({ type: null, message: '' })
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const { register, handleSubmit, formState: { errors } } = useForm<ContactFormData>()
 
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true)
     try {
-      const form = e.target as HTMLFormElement
+      const formData = new FormData()
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value)
+      })
+
       const response = await fetch("https://formspree.io/f/xgvoyyzy", {
         method: "POST",
-        body: new FormData(form),
+        body: formData,
         headers: {
           Accept: "application/json",
         },
@@ -32,14 +44,13 @@ export default function Contact() {
           type: 'success',
           message: 'Thanks for your submission!'
         })
-        form.reset()
       } else {
         throw new Error('Form submission failed')
       }
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Oops! There was a problem submitting your form'
+        message: `Oops! There was a problem submitting your form: ${error instanceof Error ? error.message : 'Unknown error'}`
       })
     } finally {
       setIsSubmitting(false)
@@ -65,7 +76,7 @@ export default function Contact() {
         <div className="container mx-auto px-4 max-w-md">
           <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {submitStatus.message && (
               <div className={`p-4 rounded-md ${submitStatus.type === 'success' ? 'bg-green-500/20' : 'bg-red-500/20'
                 }`}>
@@ -79,10 +90,12 @@ export default function Contact() {
               <Input
                 type="text"
                 id="name"
-                name="name"
-                required
+                {...register("name", { required: "Name is required" })}
                 className="w-full bg-white/10 text-white"
               />
+              {errors.name && (
+                <p className="text-red-300 text-sm mt-1">{errors.name.message}</p>
+              )}
             </div>
             <div>
               <label htmlFor="email" className="block mb-2">
@@ -91,10 +104,18 @@ export default function Contact() {
               <Input
                 type="email"
                 id="email"
-                name="email"
-                required
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address"
+                  }
+                })}
                 className="w-full bg-white/10 text-white"
               />
+              {errors.email && (
+                <p className="text-red-300 text-sm mt-1">{errors.email.message}</p>
+              )}
             </div>
             <div>
               <label htmlFor="message" className="block mb-2">
@@ -102,11 +123,13 @@ export default function Contact() {
               </label>
               <Textarea
                 id="message"
-                name="message"
-                required
+                {...register("message", { required: "Message is required" })}
                 className="w-full bg-white/10 text-white"
                 rows={4}
               />
+              {errors.message && (
+                <p className="text-red-300 text-sm mt-1">{errors.message.message}</p>
+              )}
             </div>
             <Button
               type="submit"

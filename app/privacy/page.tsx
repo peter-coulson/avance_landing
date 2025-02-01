@@ -94,7 +94,7 @@ export default function Privacy() {
                 <li>Service providers who assist our operations</li>
                 <li>Legal authorities when required by law</li>
               </ul>
-              <p>We do not sell your personal information to third parties.</p>
+              <p>We don&apos;t share your personal information with third parties.</p>
             </section>
 
             <section>
@@ -130,8 +130,7 @@ export default function Privacy() {
             <section>
               <h2 className="text-2xl font-semibold mb-4">10. Changes to This Policy</h2>
               <p>
-                We may update this Privacy Policy periodically. We will notify you of any material changes by posting
-                the new policy on this page.
+                We may update our &quot;Privacy Policy&quot; from time to time. We&apos;ll notify you of any changes by posting the new policy on this page.
               </p>
             </section>
 
