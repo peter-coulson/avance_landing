@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "react-hook-form"
-import { Footer } from "@/components/Footer"
-import { Header } from "@/components/Header"
+import { Footer } from "@/app/components/Footer"
+import { Header } from "@/app/components/Header"
 
 // Add the interface for the form data
 interface ContactFormData {
