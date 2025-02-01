@@ -41,6 +41,17 @@ export default function Privacy() {
             </section>
 
             <section>
+              <h2 className="text-2xl font-semibold mb-4">2.1 eBay Data Collection</h2>
+              <p>When you click on our eBay affiliate links, eBay may collect additional information including:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Device identifiers</li>
+                <li>Shopping and browsing behavior</li>
+                <li>Transaction data</li>
+                <li>Other information as outlined in eBay's Privacy Policy</li>
+              </ul>
+            </section>
+
+            <section>
               <h2 className="text-2xl font-semibold mb-4">3. Information We Collect</h2>
               <div className="space-y-4">
                 <div>
@@ -79,9 +90,10 @@ export default function Privacy() {
               <h2 className="text-2xl font-semibold mb-4">5. Cookies and Tracking</h2>
               <p>We use:</p>
               <ul className="list-disc pl-6">
-                <li>Essential cookies for site functionality</li>
-                <li>eBay tracking parameters for affiliate attribution</li>
-                <li>Analytics cookies to understand usage patterns</li>
+                <li>Essential cookies for site functionality (session duration)</li>
+                <li>eBay tracking parameters for affiliate attribution (30 days)</li>
+                <li>Analytics cookies to understand usage patterns (2 years)</li>
+                <li>Preference cookies to remember your settings (1 year)</li>
                 <li>You can control cookie settings through your browser</li>
               </ul>
             </section>
@@ -95,6 +107,17 @@ export default function Privacy() {
                 <li>Legal authorities when required by law</li>
               </ul>
               <p>We don&apos;t share your personal information with third parties.</p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold mb-4">6.1 eBay Partner Network Tracking</h2>
+              <p>Through the eBay Partner Network, we share:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Click data and timestamps</li>
+                <li>Device information for attribution</li>
+                <li>Purchase attribution data</li>
+                <li>Campaign and link identifiers</li>
+              </ul>
             </section>
 
             <section>
