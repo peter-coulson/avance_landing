@@ -1,22 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Header } from "../components/Header"
+import { Footer } from "../components/Footer"
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-indigo-800 text-white">
-      <header className="border-b border-white/20">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-3xl font-bold text-white">
-            Avance Style
-          </Link>
-          <nav>
-            <Link href="/recommendations" className="hover:text-yellow-300 transition-colors">
-              Your Recommendations
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="flex-grow">
         <section className="py-20">
@@ -136,21 +127,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-purple-900 mt-auto">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center">
-            <p>&copy; 2025 Avance Style. All rights reserved.</p>
-            <div>
-              <Link href="/privacy" className="mr-4 hover:text-yellow-300 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/contact" className="hover:text-yellow-300 transition-colors">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
